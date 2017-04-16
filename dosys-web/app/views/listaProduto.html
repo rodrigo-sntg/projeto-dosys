@@ -1,0 +1,63 @@
+
+ <script src="js/list.js"></script>
+
+  <script type="text/javascript">
+
+
+  $( document ).ready(function() {
+
+    var options = {
+            valueNames: [ 'name']
+          };
+
+          var userList = new List('users', options);
+  });
+
+  </script>
+
+
+
+  <div class="conteudo">
+
+  
+    <h3 class="ui dividing header">Lista Produto</h3>
+    <div id="users">
+      <div class="one field">
+        <div class="field">
+          <input class="search" style="width:100%;float:left;" placeholder="Filtro por Nome" />
+        </div>
+      </div>
+
+      <form>
+            <table class="ui selectable celled table">
+                  <thead>
+                    <tr>
+                      <th class="sort" data-sort="name">Item</th>
+                      <th>Preço Venda</th>
+                      <th>Custo</th>
+                      <th>Detalhes</th>
+                    </tr>
+                  </thead>
+                  <tbody class="list">
+                    <ui:repeat value="#{itemConsumoManagedBean.listaItens}" var="item">
+                  
+                      <tr class="positive">
+                        <td class="name">nomeItem</td>
+                            <td>precoVendaView</td>
+                            <td>R$ custoTotalView</td>
+                            <td class="center aligned">
+                              <div outcome="cadastroProduto">
+                                    <i class="edit icon "></i>
+                              </div>
+                            </td>
+                      </tr>
+                      
+                </ui:repeat>
+                  </tbody>
+            </table>
+            <div  class="ui circular add icon button right floated"  outcome="cadastroProduto">
+                <i class="add icon"></i>
+            </div>
+        </form>
+    </div>
+  </div>

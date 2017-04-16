@@ -1,0 +1,43 @@
+<html ng-app="app">
+<head>
+	<title></title>
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+	<link rel="stylesheet" href="css/style.css">	
+	<link rel="stylesheet" href="semantic/dist/semantic.min.css">	
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="semantic/dist/semantic.min.js"></script>
+	<script src="app/app.js"></script>
+	
+	<script src="app/controllers/login.controller.js"></script>
+	<script src="app/services/login.service.js"></script>
+
+	<script src="app/controllers/cliente.controller.js"></script>
+	<script src="app/services/cliente.service.js"></script>
+
+	<script src="app/routes.js"></script>
+
+	<script src="js/interface.js"></script>
+
+
+
+    <script type="text/javascript">
+		function showMenu(){
+			var box = $('.side-menu');
+			if (box.hasClass('hidden')) {
+			  	box.removeClass('hidden');
+		   		box.removeClass('visuallyhidden');
+			} else {
+			  box.addClass('visuallyhidden');
+			  box.addClass('hidden');
+			}
+		}
+    </script>
+</head>
+		    
+<body class="ui raised very padded text container segment">
+	<div ng-include="'/tags/sidebar.html'"></div>
+	<div ng-include="'/tags/header.html'"></div>
+	<ui-view></ui-view>
+</body>
+</html>

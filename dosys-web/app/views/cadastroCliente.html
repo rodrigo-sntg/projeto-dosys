@@ -1,0 +1,113 @@
+
+        <form class="ui form" prependId="false">
+        <h4 class="ui dividing header">Dados</h4>
+      
+        <div class="fields">
+            <div class="twelve wide field">
+              <label>Nome</label>
+              <input type="text" ng-model="vm.cliente.nome" name="cliente[nome]" placeholder="Nome"/>
+            </div>
+            <div class="four wide field">
+              <label>Data Nascimento</label>
+              <div class="ui calendar" >
+                <div class="ui input left icon">
+                  <i class="calendar icon"></i>
+                    <input type="text" ng-model="vm.cliente.dataNascimento" name="cliente[dataNascimento]" class="date" id="dataNascimento" ui-mask="99/99/9999" model-view-value="true"  value="{{1288323623006 | date:'dd/MM/yyyy'}}"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="three fields">
+          <div class="field">
+            <label>CPF</label>
+            <input type="text"  ng-model="vm.cliente.cpf" class="cpf" name="cliente[cpf]" 
+              required="true" value="" placeholder="Rua" type="text"/>
+          </div>
+          <div class="field">
+            <label>RG</label>
+            <input type="text" class="rg"  ng-model="vm.cliente.rg"  name="cliente[rg]" value="" placeholder="Apt #" type="text"/>
+          </div>
+          <div class="field">
+            <label>Telefone</label>
+            <input type="text" class="telefone"  ng-model="vm.cliente.telefone" name="cliente[telefone]" value="" placeholder="Apt #" type="text"/>
+          </div>
+        </div>
+
+
+        <h4 class="ui dividing header">Endereço</h4>
+        <div class="field">
+          <div class="fields">
+            <div class="twelve wide field">
+            <label>Rua</label>
+              <input type="text" ng-model="vm.cliente.endereco.rua" name="cliente[endereco][rua]" value="" placeholder="Rua" type="text"/>
+            </div>
+            <div class="four wide field">
+              <label>Complemento</label>
+              <input type="text" ng-model="vm.cliente.endereco.complemento" name="cliente[endereco][complemento]" value="" placeholder="Apt #" type="text"/>
+            </div>
+          </div>
+        </div>
+        <div class="fields">
+          <div class="eight wide field">
+            <label>Cidade</label>
+            <input type="text" ng-model="vm.cliente.endereco.cidade"  name="cliente.endereco.cidade" value="" placeholder="cidade" type="text"/>
+          </div>
+          <div class="eight wide field">
+            <label>Estado</label>
+            <select ng-model="vm.cliente.endereco.uf" name="cliente.endereco.uf" class="ui fluid dropdown">
+              <option value="" ><option>
+              <option value="ac" >Acre</option>
+              <option value="al" >Alagoas</option>
+              <option value="am" >Amazonas</option>
+              <option value="ap" >Amapá</option>
+              <option value="ba" >Bahia</option>
+              <option value="ce" >Ceará</option>
+              <option value="df" >Distrito Federal</option>
+              <option value="es" >Espírito Santo</option>
+              <option value="go" >Goiás</option>
+              <option value="ma" >Maranhão</option>
+              <option value="mt" >Mato Grosso</option>
+              <option value="ms" >Mato Grosso do Sul</option>
+              <option value="mg" >Minas Gerais</option>
+              <option value="pa" >Pará</option>
+              <option value="pb" >Paraíba</option>
+              <option value="pr" >Paraná</option>
+              <option value="pe" >Pernambuco</option>
+              <option value="pi" >Piauí</option>
+              <option value="rj" >Rio de Janeiro</option>
+              <option value="rn" >Rio Grande do Norte</option>
+              <option value="ro" >Rondônia</option>
+              <option value="rs" >Rio Grande do Sul</option>
+              <option value="rr" >Roraima</option>
+              <option value="sc" >Santa Catarina</option>
+              <option value="se" >Sergipe</option>
+              <option value="sp" >São Paulo</option>
+              <option value="to" >Tocantins</option>
+            </select>
+          </div>
+        </div>
+  
+
+          <input type="button" ng-click="vm.insert()" class="positive ui button" id="btsalvar" value="Salvar" ></input>
+          <input type="button" ng-click="vm.getByCpf()" class="primary ui button" id="btpesquisar" value="Pesquisar" ></input>
+          <input type="button" ng-click="vm.update()" class="positive ui button" value="Alterar" id="btalterar" ></input>
+          <input type="button" class="negative  ui button" value="Inativar" id="btexcluir" ></input>
+          <input type="button" class="submit ui button" outcome="cadastro" value="Novo" />
+          
+
+          <!-- BLOCO RENDERIZADO CASO TENHA COMANDA ABERTA -->
+          <div class="field" id="comandaPanel" style="margin-top:10px">
+            <h4 style="margin-top:10px" class="ui dividing header">Comanda</h4>
+            <div class="field">
+              <div class="four wide field">
+                  <label>Número</label>
+                  <h:inputText  placeholder="#" type="text"/>
+                </div>
+                
+                <input type="button" class="primary ui button" id="btabrir" value="Abrir Comanda" ></input>
+            </div>          
+          </div>
+          <!-- FIM BLOCO RENDERIZADO CASO TENHA COMANDA ABERTA -->
+          
+      </form>

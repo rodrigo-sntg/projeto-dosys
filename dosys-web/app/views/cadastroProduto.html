@@ -1,0 +1,214 @@
+
+  <script type="text/javascript">
+
+
+  $( document ).ready(function() {
+
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+//     $("#check").checkbox();
+    
+   // $('.ui.modal').modal('setting', 'closable', true).modal('show');
+     $('#modalInserir').modal({
+       blurring: true
+     });  
+    
+});
+  </script>
+
+<style type="text/css">
+    @media only screen and (max-width: 800px) {
+        .myMenu {
+            display:none;
+        }
+    }
+
+    @media only screen and (min-width: 800px) {
+        .myMenu {
+            display:block;
+        }
+    }
+  </style>
+  </h:head>
+  <h:body>
+
+  
+  
+
+            <form class="ui form">
+              <h2 class="ui dividing header">Produto</h2>
+              <div class="one field">
+              <div class="ui grid">
+                <div class="ten wide column">
+                  <div class="field">
+                    <label>Nome Item</label>
+                    <input type="text"  name="itemEstoque[nomeItem]" value="#{itemConsumoManagedBean.item.nomeItem}" placeholder="Nome Item" type="text" />
+                  </div>
+                </div>
+                <div class="six wide column">
+                  <div class="field">
+                  	<label>Código</label>
+                    <div class="ui search">
+                      <div class="ui icon input">
+  					  	        <div rendered="#{itemConsumoManagedBean.item.id eq 0}">
+  						            <input type="text"  class="prompt" value="#{itemConsumoManagedBean.item.id}" placeholder="#   sei lá" type="text"/>
+  					  	        </div>					    
+                        <i class="search icon"></i>
+                      </div>
+                      <div class="results"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="one field">
+                <div class="field">
+                  <label>Descrição</label>
+                  <input type="text"  name="produto[descricao]" value="#{itemConsumoManagedBean.item.descricao}" placeholder="Descrição" type="text"/>
+                </div>
+              </div>
+              
+              <div class="two fields">
+                <div class="field">
+                  <label>Categoria</label>
+   
+  	                <select class="ui fluid dropdown" value="#{itemConsumoManagedBean.item.subCategoria.categoria.id}">
+  	                  <option  value="">Categoria</option>
+  	                  <option value="#{itemConsumoManagedBean.categorias}">1</option>
+  	                </select>
+                </div>
+                
+                <div class="field" id="subCategoria">
+  	              <div class="field">
+  	                <label>Sub Categoria</label>
+  	                <select value="#{itemConsumoManagedBean.item.subCategoria.id}"  class="ui fluid dropdown" >
+  	                  <option  value="">Sub Categoria</option>
+  	                  <option value="#{itemConsumoManagedBean.subCategorias}" var="s"
+  	                  itemLabel="#{s.nome}" itemValue="#{s.id}">a</option>
+  	                </select>
+  	              </div>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui toggle checkbox" id="check">
+                  <input type="checkbox" value="#{itemConsumoManagedBean.item.favorito}" />
+                  <label>Favorito</label>
+                </div>
+              </div>
+              <div class="three fields">
+                <div class="field">
+                  <label>Preço de Venda</label>
+                  <input type="text"  name="produto[descricao]" value="#{itemConsumoManagedBean.item.precoVenda}" type="text"/>
+                </div>
+                <div class="field">
+                  <label>Lucro</label>
+                  <input type="text"  disabled="true" id="lucro" name="produto[descricao]" value="#{itemConsumoManagedBean.item.lucroView}"  type="text"/>
+                </div>
+				        <div class="field">
+                  <label>Custo</label>
+                  <input type="text"  name="produto[custo]" disabled="true" id="custo" value="#{itemConsumoManagedBean.item.custoTotalView}" type="text"/>
+                </div>
+              </div>
+              <div class="field">
+
+              <div class="field" id="tabela">
+                <table class="ui celled table">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Qtd</th>
+                      <th>Un Medida</th>
+                      <th>Custo</th>
+                      <th>Remover</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ui:repeat value="#{itemConsumoManagedBean.item.listaItemEstoqueConsumo}" var="i">
+                      <tr>
+                        <td>nomeItem</td>
+                        <td>medidaPorUnidade</td>
+                        <td>unidadeMedida</td>
+                        <td>custoView</td>
+                        <td><i class="remove circle icon"></i></td>
+                      </tr>
+                    </ui:repeat>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="5">
+                        <div class="ui right floated pagination menu">
+                          <a class="icon item" onClick="$('#modalInserir').show();return false;">
+                            <i class="add chevron icon"></i>
+                          </a>
+                        </div>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="one field">
+              <div class="field">
+                <input type="button"  class="positive ui button" rendered="#{itemConsumoManagedBean.item.id eq 0}"  binding="#{itemConsumoManagedBean.btsalvar}" 
+                id="btsalvar" value="Salvar" action="#{itemConsumoManagedBean.salvar}"></input>
+                <input type="button"  rendered="#{itemConsumoManagedBean.item.id ne 0}" class="positive ui button"  binding="#{itemConsumoManagedBean.btalterar}" 
+                id="btalterar" value="Alterar" action="#{itemConsumoManagedBean.alterar}"></input>
+                <input type="button"  rendered="#{itemConsumoManagedBean.item.id ne 0}" class="negative ui button"  binding="#{itemConsumoManagedBean.btexcluir}" 
+                id="btexcluir" value="Remover" action="#{itemConsumoManagedBean.excluir}"></input>
+                <input type="button"  class="primary ui button" binding="#{itemConsumoManagedBean.btpesquisar}" 
+                  id="btpesquisar" value="Pesquisar" action="#{itemConsumoManagedBean.consultar}"/>
+                <input type="button" value="Lista" class="secondary  ui button" outcome="listaProduto"/>
+                <input type="button" class="submit ui button" outcome="cadastroProduto" value="Novo" />
+              </div>
+            </div>
+            <div class="one field">
+              <div class="field">
+              	
+              </div>
+            </div>
+              
+            <div id="panelModal">
+            
+              <div class="ui modal" id="modalInserir" style="margin-top: -200px;">
+    			    <i class="close icon"></i>
+    			    <div class="header">
+    			      Inserir Item na lista
+    			    </div>
+    			    <div class="content">
+    			      <div class="ui form">
+    			        <div class="three fields">
+    			          <div class="field">
+    			            <label>Item</label>
+    			            <select value="" name="#{itemEstoqueConsumo.itemEstoque.id}" class="ui fluid dropdown">
+    			           		<select value=""></select>
+    			              <select value="1" name="#{itemConsumoManagedBean.listaEstoque}"></select>
+    			            </select>
+    			          </div>
+    			          <div class="field">
+    			            <label>Quantidade</label>
+    			            <input type="text" name="itemEstoque[quantidadeCritica]" placeholder="#" type="text"/>
+    			          </div>
+    			          <div class="field">
+    			            <label>Un Medida</label>
+    			                <select value="" name="#{itemConsumoManagedBean.itemEstoqueConsumo.medida.unidadeMedida}" class="ui fluid dropdown">
+    			                  <option value="" >un medida</option>
+    			                  <option value="ml" >ml</option>
+    			                  <option value="L" >L</option>
+    			                  <option value="g" >g</option>
+    			                  <option value="mg" >mg</option>
+    			                  <option value="kg" >Kg</option>
+    			                  <option value="un">un</option>
+    			                </select>
+    			          </div>
+    			        </div>
+      			    	<div class="actions">
+      			      	<div class="ui button" onClick="$('.ui.modal').hide();return false;">Cancel</div>
+      			      		<input type="button"  class="positive ui button"  
+      			        			value="Adicionar" onclick="$('.ui.modal').hide();" action="#{itemConsumoManagedBean.inserirItemLista}">
+      			        	</input>
+      			    	</div>
+    			      </div>
+    			    </div>
+    			  </div>
+          </div>
+        </form>
