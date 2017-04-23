@@ -8,6 +8,7 @@ const
 		nome:String,
 		dataNascimento:Date,
 		cpf:String,
+		status:Boolean,
 		rg:String,
 		telefone:String,
 		endereco: {

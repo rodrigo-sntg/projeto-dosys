@@ -17,15 +17,28 @@ ClienteController.prototype.insert = function(){
 
 };
 
-ClienteController.prototype.delete = function(){
+ClienteController.prototype.update = function(){
 	var that = this;
-	this.clienteService.delete(this.cliente._id).then(function (response){
+	this.clienteService.update(this.cliente).then(function (response){
 		that.getAll();
 	}).catch(function(erro){
 		console.log(erro);
 	});
 
 };
+
+ClienteController.prototype.delete = function(){
+	var that = this;
+	this.clienteService.delete(this.cliente._id).then(function (response){
+		that.cliente = response.data;
+		that.getAll();
+	}).catch(function(erro){
+		console.log(erro);
+	});
+
+};
+
+
 
 ClienteController.prototype.getAll = function(){
 	var that = this;

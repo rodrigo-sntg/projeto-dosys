@@ -20,8 +20,8 @@ ClienteService.prototype.update = function(cliente){
 
 ClienteService.prototype.delete = function(id){
 	return this.http({
-		method:'POST',
-		url:'http://localhost:9000/api/clientes/' + id
+		method:'DELETE',
+		url:'http://localhost:9000/api/clientes/id/' + id
 	})
 }
 

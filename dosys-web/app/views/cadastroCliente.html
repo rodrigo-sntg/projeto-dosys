@@ -1,4 +1,6 @@
-
+<script type="text/javascript">
+$('.test.checkbox').checkbox();
+</script>
         <form class="ui form" prependId="false">
         <h4 class="ui dividing header">Dados</h4>
       
@@ -22,15 +24,22 @@
           <div class="field">
             <label>CPF</label>
             <input type="text"  ng-model="vm.cliente.cpf" class="cpf" name="cliente[cpf]" 
-              required="true" value="" placeholder="Rua" type="text"/>
+              required="true" value="" placeholder="xxx.xxx.xxx-xx" type="text"/>
           </div>
           <div class="field">
             <label>RG</label>
-            <input type="text" class="rg"  ng-model="vm.cliente.rg"  name="cliente[rg]" value="" placeholder="Apt #" type="text"/>
+            <input type="text" class="rg"  ng-model="vm.cliente.rg"  name="cliente[rg]" value="" placeholder="x.xxx.xxx-x" type="text"/>
           </div>
           <div class="field">
             <label>Telefone</label>
-            <input type="text" class="telefone"  ng-model="vm.cliente.telefone" name="cliente[telefone]" value="" placeholder="Apt #" type="text"/>
+            <input type="text" class="telefone"  ng-model="vm.cliente.telefone" name="cliente[telefone]" value="" placeholder="(xx) 0000-0000" type="text"/>
+          </div>
+        </div>
+        
+        <div class="two fields">
+          <div class="ui test toggle checkbox">
+            <input type="checkbox" ng-model="vm.cliente.status" ng-value="{{vm.cliente.status}}">
+            <label>Status</label>
           </div>
         </div>
 
@@ -87,13 +96,16 @@
             </select>
           </div>
         </div>
+        <div class="ui error" data-ng-messages="serverErrors" data-ng-show="signUpForm.$submitted" data-ng-cloak>
+            <p data-ng-message="emailexists">Email already exists</p>
+        </div>
   
 
-          <input type="button" ng-click="vm.insert()" class="positive ui button" id="btsalvar" value="Salvar" ></input>
+          <input type="button" ng-if="vm.cliente._id == undefined" ng-click="vm.insert()" class="positive ui button" id="btsalvar" value="Salvar" ></input>
           <input type="button" ng-click="vm.getByCpf()" class="primary ui button" id="btpesquisar" value="Pesquisar" ></input>
-          <input type="button" ng-click="vm.update()" class="positive ui button" value="Alterar" id="btalterar" ></input>
-          <input type="button" class="negative  ui button" value="Inativar" id="btexcluir" ></input>
-          <input type="button" class="submit ui button" outcome="cadastro" value="Novo" />
+          <input type="button" ng-if="vm.cliente._id != undefined"  ng-click="vm.update()" class="positive ui button" value="Alterar" id="btalterar" ></input>
+          <input type="button" ng-if="vm.cliente._id != undefined" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="btexcluir" ></input>
+          <a class="submit ui button">Novo</a>
           
 
           <!-- BLOCO RENDERIZADO CASO TENHA COMANDA ABERTA -->

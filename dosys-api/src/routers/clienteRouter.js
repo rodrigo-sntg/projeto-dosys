@@ -11,7 +11,7 @@ clienteRouter.get("/", function* (next){
 });
 
 clienteRouter.get("/cpf/:cpf", function* (next){
-	this.body = yield clienteService.getByCpf(this.request.query);
+	this.body = yield clienteService.getByCpf(this.params.cpf);
 });
 
 clienteRouter.post("/", function* (next){
@@ -19,11 +19,11 @@ clienteRouter.post("/", function* (next){
 
 });
 
-clienteRouter.put("/update", function* (next){
+clienteRouter.put("/", function* (next){
 	this.body = yield clienteService.update(this.request.query);
 });
 
-clienteRouter.delete("/delete/:id", function* (next){
+clienteRouter.delete("/id/:id", function* (next){
 	this.body = yield clienteService.delete(this.params.id);
 });
 
