@@ -1,20 +1,21 @@
 <script type="text/javascript">
 $('.test.checkbox').checkbox();
 </script>
-        <form class="ui form" prependId="false">
+        
+        <form name="clienteForm" class="ui form" prependId="false">
         <h4 class="ui dividing header">Dados</h4>
       
         <div class="fields">
             <div class="twelve wide field">
               <label>Nome</label>
-              <input type="text" ng-model="vm.cliente.nome" name="cliente[nome]" placeholder="Nome"/>
+              <input type="text" ng-required="true" ng-model="vm.cliente.nome" name="nome" placeholder="Nome"/>
             </div>
             <div class="four wide field">
               <label>Data Nascimento</label>
               <div class="ui calendar" >
                 <div class="ui input left icon">
                   <i class="calendar icon"></i>
-                    <input type="text" ng-model="vm.cliente.dataNascimento" name="cliente[dataNascimento]" class="date" id="dataNascimento" ui-mask="99/99/9999" model-view-value="true"  value="{{1288323623006 | date:'dd/MM/yyyy'}}"/>
+                    <input ng-required="true" type="text" ng-model="vm.cliente.dataNascimento" name="dataNascimento" class="date" id="dataNascimento" ui-mask="99/99/9999" model-view-value="true"  value="{{1288323623006 | date:'dd/MM/yyyy'}}"/>
                 </div>
               </div>
             </div>
@@ -23,22 +24,22 @@ $('.test.checkbox').checkbox();
         <div class="three fields">
           <div class="field">
             <label>CPF</label>
-            <input type="text"  ng-model="vm.cliente.cpf" class="cpf" name="cliente[cpf]" 
+            <input type="text" ng-required="true" ng-model="vm.cliente.cpf" class="cpf" name="cpf" 
               required="true" value="" placeholder="xxx.xxx.xxx-xx" type="text"/>
           </div>
           <div class="field">
             <label>RG</label>
-            <input type="text" class="rg"  ng-model="vm.cliente.rg"  name="cliente[rg]" value="" placeholder="x.xxx.xxx-x" type="text"/>
+            <input type="text" class="rg" ng-required="true" ng-model="vm.cliente.rg"  name="rg" value="" placeholder="x.xxx.xxx-x" type="text"/>
           </div>
           <div class="field">
             <label>Telefone</label>
-            <input type="text" class="telefone"  ng-model="vm.cliente.telefone" name="cliente[telefone]" value="" placeholder="(xx) 0000-0000" type="text"/>
+            <input type="text" class="telefone" ng-required="true" ng-model="vm.cliente.telefone" name="telefone" value="" placeholder="(xx)00000-0000"  type="text"/>
           </div>
         </div>
         
         <div class="two fields">
           <div class="ui test toggle checkbox">
-            <input type="checkbox" ng-model="vm.cliente.status" ng-value="{{vm.cliente.status}}">
+            <input type="checkbox" name="status" ng-model="vm.cliente.status" ng-value="{{vm.cliente.status}}">
             <label>Status</label>
           </div>
         </div>
@@ -49,22 +50,22 @@ $('.test.checkbox').checkbox();
           <div class="fields">
             <div class="twelve wide field">
             <label>Rua</label>
-              <input type="text" ng-model="vm.cliente.endereco.rua" name="cliente[endereco][rua]" value="" placeholder="Rua" type="text"/>
+              <input type="text" ng-model="vm.cliente.endereco.rua" ng-required="true" name="rua" value="" placeholder="Rua" type="text"/>
             </div>
             <div class="four wide field">
               <label>Complemento</label>
-              <input type="text" ng-model="vm.cliente.endereco.complemento" name="cliente[endereco][complemento]" value="" placeholder="Apt #" type="text"/>
+              <input type="text" ng-model="vm.cliente.endereco.complemento" name="complemento" value="" placeholder="Apt #" type="text"/>
             </div>
           </div>
         </div>
         <div class="fields">
           <div class="eight wide field">
             <label>Cidade</label>
-            <input type="text" ng-model="vm.cliente.endereco.cidade"  name="cliente.endereco.cidade" value="" placeholder="cidade" type="text"/>
+            <input type="text" ng-model="vm.cliente.endereco.cidade" ng-required="true" name="cidade" value="" placeholder="cidade" type="text"/>
           </div>
           <div class="eight wide field">
             <label>Estado</label>
-            <select ng-model="vm.cliente.endereco.uf" name="cliente.endereco.uf" class="ui fluid dropdown">
+            <select ng-model="vm.cliente.endereco.uf" name="uf" ng-required="true" class="ui fluid dropdown">
               <option value="" ><option>
               <option value="ac" >Acre</option>
               <option value="al" >Alagoas</option>
@@ -96,12 +97,29 @@ $('.test.checkbox').checkbox();
             </select>
           </div>
         </div>
-        <div class="ui error" data-ng-messages="serverErrors" data-ng-show="signUpForm.$submitted" data-ng-cloak>
-            <p data-ng-message="emailexists">Email already exists</p>
+        <div class="ui negative message" ng-show="vm.serverErrors != undefined">
+            <p>{{vm.serverErrors}}</p>
+        </div>
+
+        <div ng-messages="clienteForm.$invalid" class="ui negative message">
+          <i class="close icon" ng-click="" onclick="$('.ui.negative.message').hide();"></i>
+          <div class="header">
+            There were some errors with your submission
+          </div>
+          <ul class="list">
+            <li ng-show="clienteForm.nome.$invalid && clienteForm.nome.$dirty">O campo <b>NOME</B> é obrigatório para cadastro.</li>
+            <li ng-show="clienteForm.cpf.$invalid && clienteForm.cpf.$dirty">O campo <b>CPF</B> é obrigatório para cadastro.</li>
+            <li ng-show="clienteForm.rg.$invalid && clienteForm.rg.$dirty">O campo <b>RG</B> é obrigatório para cadastro.</li>
+            <li ng-show="clienteForm.dataNascimento.$invalid && clienteForm.dataNascimento.$dirty">O campo <b>DATA DE NASCIMENTO</B> é obrigatório para cadastro.</li>
+            <li ng-show="clienteForm.telefone.$invalid && clienteForm.telefone.$dirty">O campo <b>TELEFONE</B> é obrigatório para cadastro.</li>
+            <li ng-show="clienteForm.rua.$invalid && clienteForm.rua.$dirty">O campo <b>RUA</B> é obrigatório para cadastro.</li>
+            <li ng-show="clienteForm.cidade.$invalid && clienteForm.cidade.$dirty">O campo <b>CIDADE</B> é obrigatório para cadastro.</li>
+            <li ng-show="clienteForm.uf.$invalid && clienteForm.uf.$dirty">O campo <b>ESTADO</B> é obrigatório para cadastro.</li>
+          </ul>
         </div>
   
 
-          <input type="button" ng-if="vm.cliente._id == undefined" ng-click="vm.insert()" class="positive ui button" id="btsalvar" value="Salvar" ></input>
+          <input type="button" ng-disabled="clienteForm.$invalid" ng-if="vm.cliente._id == undefined" ng-click="vm.insert()" class="positive ui button" id="btsalvar" value="Salvar" ></input>
           <input type="button" ng-click="vm.getByCpf()" class="primary ui button" id="btpesquisar" value="Pesquisar" ></input>
           <input type="button" ng-if="vm.cliente._id != undefined"  ng-click="vm.update()" class="positive ui button" value="Alterar" id="btalterar" ></input>
           <input type="button" ng-if="vm.cliente._id != undefined" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="btexcluir" ></input>

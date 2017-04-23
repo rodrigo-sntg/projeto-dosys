@@ -15,7 +15,7 @@ class ClienteService {
 			cliente.endereco = end._id;
 			return Cliente.create(cliente);
 		}else{
-			return "cliente duplicado";
+			throw new Error("cliente duplicado")
 		}
 	}
 

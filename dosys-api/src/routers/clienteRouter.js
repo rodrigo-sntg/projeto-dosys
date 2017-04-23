@@ -15,7 +15,15 @@ clienteRouter.get("/cpf/:cpf", function* (next){
 });
 
 clienteRouter.post("/", function* (next){
-	this.body = yield clienteService.insert(this.request.query);
+	try{
+
+		this.body = yield clienteService.insert(this.request.query);
+
+	}catch(e){
+		console.log('Error: ', e);
+		this.status = e.status || 500;
+		this.body = e.toString(); 
+	}
 
 });
 

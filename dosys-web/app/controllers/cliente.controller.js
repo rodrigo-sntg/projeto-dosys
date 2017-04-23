@@ -4,6 +4,7 @@ ClienteController = function(clienteService){
 	this.clientes = clienteService.getAll().then(function (response){
 		console.log(response.data);
 	});
+	this.serverErrors = undefined;
 	var vm = this;
 };
 
@@ -13,6 +14,7 @@ ClienteController.prototype.insert = function(){
 		that.getAll();
 	}).catch(function(erro){
 		console.log(erro);
+		this.serverErrors = erro;
 	});
 
 };
