@@ -29,6 +29,7 @@ class CategoriaController{
 
 	update (){
 		var that = this;
+		console.log(that.categoria);
 		this.categoriaService.update(this.categoria).then(function (response){
 			that.getAll();
 		}).catch(function(erro){
