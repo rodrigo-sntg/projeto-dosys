@@ -2,7 +2,8 @@
 
 const 
 	Cliente = require("../models/clienteModel").Cliente,
-	Endereco = require("../models/enderecoModel").Endereco;
+	Endereco = require("../models/enderecoModel").Endereco,
+	DateHelper = require("../helpers/DateHelper");
 
 class ClienteService {
 	
@@ -25,20 +26,12 @@ class ClienteService {
 		let end;
 		console.log("ID ENDERECO - " + cliente.endereco._id);
 		if(cliente.endereco._id == undefined){
-			console.log("ENDERECO SEM ID - CRIAR - OBJETO -");
-			console.log(cliente.endereco);
 			let teste = new Endereco(cliente.endereco);
-			console.log(teste);
 			end = yield Endereco.create(teste);
-			console.log(end._id + " --- ID CRIADO");
 			cliente.endereco = end._id;
-			console.log("ENDERECO CRIADO");
-			console.log(cliente.endereco);
 		} else{
-			console.log("ENDERECO COM ID - ALTERAR - OBJETO - ");
-			console.log(cliente.endereco);
+
 			let teste = new Endereco(cliente.endereco);
-			console.log(teste);
 			end = yield Endereco.update({_id: teste._id}, teste);
 		}
 
@@ -62,6 +55,8 @@ class ClienteService {
 				console.log(err);
 				return err;
 		    if (result) {
+				result.dataNascimento = new Date(result.dataNascimento);
+		    	
 		        return result;
 		    } else {
 		        return null;

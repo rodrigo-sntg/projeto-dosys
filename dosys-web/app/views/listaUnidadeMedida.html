@@ -10,7 +10,7 @@
   </script>
 
   <div style="width: 100%;" class="ui raised very padded text container segment">
-    <h3 class="ui dividing header">Itens Estoque</h3>
+    <h3 class="ui dividing header">Clientes</h3>
     <div id="users">
       <div class="one field">
         <div class="field">
@@ -18,25 +18,24 @@
         </div>
       </div>
 
-      <div ng-repeat="item in itensEstoque" ng-class-odd="'black'" ng-class-even="'white'">
-        {{item.nome}}
+      <div ng-repeat="unidade in unidadeMedidas" ng-class-odd="'black'" ng-class-even="'white'">
+        {{unidade.unidade}}
       </div>
 
-      <form name="listaClienteForm">
+      <form name="listaUnidadesForm">
         <table class="ui selectable celled table">
           <thead>
             <tr>
-              <th class="sort" data-sort="name">Nome</th>
-              <th>Status</th>
-              <th>Editar</th>
+              <th class="sort">Nome</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>              
-              <tr ng-repeat="item in vm.itensEstoque  | filter : filtro track by $index" class="positive">
-                    <td class="name">{{item.nome}}</td>
-                    <td class="ativo">{{item.status}}</td>
+              <tr ng-repeat="unidade in vm.unidadeMedidas  | filter : filtro track by $index" class="positive">
+                    <td class="name">{{unidade.unidade}}</td>
                     <td class="center aligned">
-                      <a  ui-sref="cadastroEstoque({id:item._id})"><i class="edit icon "/></a>
+                        <i ui-sref="cadastroUnidadeMedida({id:unidade._id})" class="edit icon "/>
+                        <i ng-click="vm.delete(unidade._id)" class="delete icon "/>
                     </td>
               </tr>
           </tbody>

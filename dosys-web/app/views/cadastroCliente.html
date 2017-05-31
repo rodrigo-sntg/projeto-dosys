@@ -6,16 +6,17 @@ $('.test.checkbox').checkbox();
         <h4 class="ui dividing header">Dados</h4>
       
         <div class="fields">
-            <div class="twelve wide field">
+            <div class="eight wide field">
               <label>Nome</label>
               <input type="text" ng-required="true" ng-model="vm.cliente.nome" name="nome" placeholder="Nome"/>
             </div>
-            <div class="four wide field">
+            <div class="eight wide field">
               <label>Data Nascimento</label>
               <div class="ui calendar" >
                 <div class="ui input left icon">
                   <i class="calendar icon"></i>
-                    <input ng-required="true" type="text" ng-model="vm.cliente.dataNascimento" name="dataNascimento" class="date" id="dataNascimento" ui-mask="99/99/9999" model-view-value="true"  value="{{1288323623006 | date:'dd/MM/yyyy'}}"/>
+                    <input style="width:100%" ng-required="true" type="date"  ng-model="vm.cliente.dataNascimento" 
+                        name="dataNascimento" class="date" id="dataNascimento" />
                 </div>
               </div>
             </div>
@@ -23,10 +24,15 @@ $('.test.checkbox').checkbox();
 
         <div class="three fields">
           <div class="field">
+
             <label>CPF</label>
-            <input type="text" ng-required="true" ng-model="vm.cliente.cpf" class="cpf" name="cpf" 
-              required="true" value="" placeholder="xxx.xxx.xxx-xx" type="text"/>
+            <div class="ui icon input">
+              <input type="text" ng-required="true" ng-model="vm.cliente.cpf" class="cpf" name="cpf" 
+                  required="true" value="" placeholder="xxx.xxx.xxx-xx" type="text"/>
+              <i class="inverted circular search link icon" ng-click="vm.getByCpf()"></i>
+            </div>
           </div>
+
           <div class="field">
             <label>RG</label>
             <input type="text" class="rg" ng-required="true" ng-model="vm.cliente.rg"  name="rg" value="" placeholder="x.xxx.xxx-x" type="text"/>
@@ -43,6 +49,7 @@ $('.test.checkbox').checkbox();
             <label>Status</label>
           </div>
         </div>
+
 
 
         <h4 class="ui dividing header">Endereço</h4>
@@ -97,33 +104,15 @@ $('.test.checkbox').checkbox();
             </select>
           </div>
         </div>
-        <div class="ui negative message" ng-show="vm.serverErrors != undefined">
-            <p>{{vm.serverErrors}}</p>
-        </div>
 
-        <div ng-messages="clienteForm.$invalid" class="ui negative message">
-          <i class="close icon" ng-click="" onclick="$('.ui.negative.message').hide();"></i>
-          <div class="header">
-            There were some errors with your submission
-          </div>
-          <ul class="list">
-            <li ng-show="clienteForm.nome.$invalid && clienteForm.nome.$dirty">O campo <b>NOME</B> é obrigatório para cadastro.</li>
-            <li ng-show="clienteForm.cpf.$invalid && clienteForm.cpf.$dirty">O campo <b>CPF</B> é obrigatório para cadastro.</li>
-            <li ng-show="clienteForm.rg.$invalid && clienteForm.rg.$dirty">O campo <b>RG</B> é obrigatório para cadastro.</li>
-            <li ng-show="clienteForm.dataNascimento.$invalid && clienteForm.dataNascimento.$dirty">O campo <b>DATA DE NASCIMENTO</B> é obrigatório para cadastro.</li>
-            <li ng-show="clienteForm.telefone.$invalid && clienteForm.telefone.$dirty">O campo <b>TELEFONE</B> é obrigatório para cadastro.</li>
-            <li ng-show="clienteForm.rua.$invalid && clienteForm.rua.$dirty">O campo <b>RUA</B> é obrigatório para cadastro.</li>
-            <li ng-show="clienteForm.cidade.$invalid && clienteForm.cidade.$dirty">O campo <b>CIDADE</B> é obrigatório para cadastro.</li>
-            <li ng-show="clienteForm.uf.$invalid && clienteForm.uf.$dirty">O campo <b>ESTADO</B> é obrigatório para cadastro.</li>
-          </ul>
-        </div>
   
 
-          <input type="button" ng-disabled="clienteForm.$invalid" ng-if="vm.cliente._id == undefined" ng-click="vm.insert()" class="positive ui button" id="btsalvar" value="Salvar" ></input>
-          <input type="button" ng-click="vm.getByCpf()" class="primary ui button" id="btpesquisar" value="Pesquisar" ></input>
-          <input type="button" ng-if="vm.cliente._id != undefined"  ng-click="vm.update()" class="positive ui button" value="Alterar" id="btalterar" ></input>
-          <input type="button" ng-if="vm.cliente._id != undefined" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="btexcluir" ></input>
-          <a class="submit ui button">Novo</a>
+          <input type="button" ng-disabled="clienteForm.$invalid" ng-click="!vm.cliente._id ? vm.insert() : vm.update()" 
+            class="positive ui button" id="btsalvar" value="Salvar" />
+          
+          <input type="button" ng-if="vm.cliente._id" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="  btexcluir" />
+
+          <a class="submit ui button">Limpar Campos</a>
           
 
           <!-- BLOCO RENDERIZADO CASO TENHA COMANDA ABERTA -->
@@ -132,10 +121,10 @@ $('.test.checkbox').checkbox();
             <div class="field">
               <div class="four wide field">
                   <label>Número</label>
-                  <h:inputText  placeholder="#" type="text"/>
+                  <input type="text" class="" placeholder="#" type="text"/>
                 </div>
                 
-                <input type="button" class="primary ui button" id="btabrir" value="Abrir Comanda" ></input>
+                <input ng-disabled="!vm.cliente._id" type="button" class="primary ui button" id="btabrir" value="Abrir Comanda" ></input>
             </div>          
           </div>
           <!-- FIM BLOCO RENDERIZADO CASO TENHA COMANDA ABERTA -->

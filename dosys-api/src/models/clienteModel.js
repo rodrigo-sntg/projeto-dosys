@@ -5,11 +5,11 @@ const
 	Schema = mongoose.Schema,
 	
 	ClienteSchema = new Schema({
-		nome:String,
+		nome:{type:String},
 		dataNascimento:Date,
-		cpf:String,
+		cpf:{type:String, unique:true},
 		status:Boolean,
-		rg:String,
+		rg:{type:String, unique:true},
 		telefone:String,
 		endereco: {
 			type:Schema.Types.ObjectId,

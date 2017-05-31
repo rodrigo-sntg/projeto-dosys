@@ -1,0 +1,24 @@
+<script type="text/javascript">
+$('.test.checkbox').checkbox();
+</script>
+        
+        <form name="unidadeMedidaForm" class="ui form" prependId="false">
+        <h4 class="ui dividing header">Unidades de Medida</h4>
+      
+        <div class="fields">
+            <div class="eight wide field">
+              <label>Unidade</label>
+              <input type="text" ng-required="true" ng-model="vm.unidadeMedida.unidade" name="nome" placeholder="Nome"/>
+            </div>
+        </div>
+
+  
+
+          <input type="button" ng-disabled="unidadeMedidaForm.$invalid" ng-click="!vm.unidadeMedida._id ? vm.insert() : vm.update()" 
+            class="positive ui button" id="btsalvar" value="Salvar" />
+          
+          <input type="button" ng-if="vm.unidadeMedida._id" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="  btexcluir" />
+
+          <a class="submit ui button">Limpar Campos</a>
+          
+      </form>
