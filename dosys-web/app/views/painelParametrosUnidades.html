@@ -1,0 +1,74 @@
+	<script type="text/javascript">
+
+
+	$( document ).ready(function() {
+
+		$('.ui.dropdown').dropdown();
+		$('.ui.checkbox').checkbox();
+
+
+		$('.ui .item').on('click', function() {
+		   $('.ui .item').removeClass('active');
+		   $(this).addClass('active');
+		}); 
+	}
+
+	</script>
+
+	<div style="width: 100%;" class="ui raised very padded text container segment">
+	    <h3 class="ui dividing header">Parametrizações</h3>
+	    <div id="users">
+			<form name="listaClienteForm">
+				<div class="ui menu secondary pointing ">
+				  <a ui-sref="painelParametrosUnidades" class="item active">
+				    Unidades de medida
+				  </a>
+				  <a ui-sref="painelParametrosCategorias" class="item">
+				    Categorias
+				  </a>
+				  <a ui-sref="painelParametrosPacotes" class="item">
+				    Pacotes
+				  </a>
+
+				</div>
+				<div class="">
+				    <div id="users">
+				      <div class="one field">
+				        <div class="field">
+				          <input ng-model="filtro" class="search" style="width:100%;float:left;" placeholder="Filtro por Nome" />
+				        </div>
+				      </div>
+
+				      <div ng-repeat="unidade in unidadeMedidas" ng-class-odd="'black'" ng-class-even="'white'">
+				        {{unidade.unidade}}
+				      </div>
+
+				      <form name="listaUnidadesForm">
+				        <table class="ui selectable celled table">
+				          <thead>
+				            <tr>
+				              <th class="sort">Nome</th>
+				              <th class="center aligned">Remover</th>
+				            </tr>
+				          </thead>
+				          <tbody>              
+				              <tr ng-repeat="unidade in vm.unidadeMedidas  | filter : filtro track by $index" class="positive">
+				                    <td ui-sref="cadastroUnidadeMedida({id:unidade._id})" class="name">{{unidade.unidade}}</td>
+				                    <td ui-sref="cadastroUnidadeMedida({id:unidade._id})" class="center aligned">
+							            <button ng-click="vm.delete(item._id)" class="circular ui icon button">
+						                  <i class="icon delete"></i>
+						                </button>
+				                    </td>
+				              </tr>
+				          </tbody>
+				        </table>
+				        <input type="button" class="ui circular add icon button right floated"  outcome="cadastroProduto">
+				            <i class="add icon"></i>
+				        </input>
+				      </form>
+				    </div>
+				</div>
+		        
+			</form>
+		</div>
+	</div>

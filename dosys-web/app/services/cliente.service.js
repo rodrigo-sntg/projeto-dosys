@@ -40,4 +40,12 @@ ClienteService.prototype.getByCpf = function(cliente){
 	})
 }
 
+ClienteService.prototype.getById = function(id){
+	return this.http({
+		method:'GET',
+		url:'http://localhost:9000/api/clientes/id/'+ id,
+		params:id
+	})
+}
+
 angular.module("app").service("clienteService", ClienteService);

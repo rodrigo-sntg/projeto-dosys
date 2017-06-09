@@ -1,63 +1,67 @@
 
- <script src="js/list.js"></script>
-
-  <script type="text/javascript">
+    <script type="text/javascript">
 
 
   $( document ).ready(function() {
 
-    var options = {
-            valueNames: [ 'name']
-          };
-
-          var userList = new List('users', options);
-  });
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+  }
 
   </script>
 
-
-
-  <div class="conteudo">
-
-  
-    <h3 class="ui dividing header">Lista Produto</h3>
+  <div style="width: 100%;" class="ui raised very padded text container segment">
+    <h3 class="ui dividing header">Itens Consumo</h3>
     <div id="users">
-      <div class="one field">
-        <div class="field">
-          <input class="search" style="width:100%;float:left;" placeholder="Filtro por Nome" />
-        </div>
+
+
+      <div ng-repeat="item in itemConsumos" ng-class-odd="'black'" ng-class-even="'white'">
+        {{item.nome}}
       </div>
 
-      <form>
-            <table class="ui selectable celled table">
-                  <thead>
-                    <tr>
-                      <th class="sort" data-sort="name">Item</th>
-                      <th>Preço Venda</th>
-                      <th>Custo</th>
-                      <th>Detalhes</th>
-                    </tr>
-                  </thead>
-                  <tbody class="list">
-                    <ui:repeat value="#{itemConsumoManagedBean.listaItens}" var="item">
-                  
-                      <tr class="positive">
-                        <td class="name">nomeItem</td>
-                            <td>precoVendaView</td>
-                            <td>R$ custoTotalView</td>
-                            <td class="center aligned">
-                              <div outcome="cadastroProduto">
-                                    <i class="edit icon "></i>
-                              </div>
-                            </td>
-                      </tr>
-                      
-                </ui:repeat>
-                  </tbody>
-            </table>
-            <div  class="ui circular add icon button right floated"  outcome="cadastroProduto">
-                <i class="add icon"></i>
-            </div>
-        </form>
+      <form name="listaClienteForm">
+
+        <table class="ui compact celled definition table">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="center aligned">Nome</th>
+              <th class="center aligned">Remover</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in vm.itemConsumos  | filter : filtro track by $index">
+              <td class="collapsing">
+                <div class="ui fitted slider checkbox">
+                  <input ng-disabled="true" type="checkbox" ng-checked="{{item.status}}"> <label></label>
+                </div>
+              </td>
+              <td ui-sref="cadastroProduto({id:item._id})" class="center aligned">{{item.nome}}</td>
+              <td ui-sref="cadastroProduto({id:item._id})" class="center aligned">
+                <button ng-click="vm.delete(item._id)" class="circular ui icon button">
+                  <i class="icon delete"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="full-width">
+            <tr>
+              <th></th>
+              <th colspan="4">
+                <div ui-sref="cadastroProduto" class="ui right floated small primary labeled icon button">
+                  <i class="add icon"></i> Adicionar
+                </div>
+                <div  class="ui">
+                  <div style="height: 33px;"   class="ui icon input">
+                    <input ng-model="filtro" class="prompt" type="text" placeholder="Filtro">
+                    <i class="search icon"></i>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+
+      </form>
     </div>
-  </div>
+</div>

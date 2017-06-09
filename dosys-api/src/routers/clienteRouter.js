@@ -14,6 +14,10 @@ clienteRouter.get("/cpf/:cpf", function* (next){
 	this.body = yield clienteService.getByCpf(this.params.cpf);
 });
 
+clienteRouter.get("/id/:id", function* (next){
+	this.body = yield clienteService.getById(this.params.id);
+});
+
 clienteRouter.post("/", function* (next){
 	try{
 

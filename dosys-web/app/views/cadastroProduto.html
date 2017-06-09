@@ -46,10 +46,10 @@
                   	<label>Código</label>
                     <div class="ui search">
                       <div class="ui icon input">
-  					  	        <div ng-if="vm.produto._id" >
-  						            <input type="text"  class="prompt" value="" ng-required="true" ng-model="vm.itemConsumo._id" placeholder="" type="text"/>
+  					  	        <div ng-if="vm.itemConsumo._id" >
+  						            <input ng-disabled="true" type="text"  class="prompt" value="" ng-required="true" ng-model="vm.itemConsumo._id" placeholder="" type="text"/>
   					  	        </div>					    
-                        <i class="search icon" ng-click="vm.getByCodigo()"></i>
+                        <i class="search icon" ng-click="vm.getById()"></i>
                       </div>
                       <div class="results"></div>
                     </div>
@@ -68,36 +68,20 @@
                 <div class="field">
                   <label>Categoria</label>
   
-                    <!-- código para colocar na controller 
-                        $http({
-                            method: 'GET',
-                            url: '/categorias/'
-                        }).success(function (result) {
-                        $scope.categorias = result;
-                    }); -->
 
-                    <!-- <select ng-model="vm.itemConsumo.categoria" class="ui fluid dropdown"
-                          ng-options="cat._Id as cat.nome for cat in categorias">
+                    <select ng-change="vm.atualizaSubCategorias()"  ng-model="vm.categoria._id" class="ui fluid dropdown"
+                          ng-options="cat._id as cat.nome for cat in vm.categorias">
                       <option value="">Selecione a categoria</option>
-                  </select> -->
+                  </select>
                 </div>
                 
                 <div class="field" id="subCategoria">
   	              <div class="field">
   	                <label>Sub Categoria</label>
   
-                    <!-- código para colocar na controller 
-                        $http({
-                            method: 'GET',
-                            url: '/subCategorias/'
-                        }).success(function (result) {
-                        $scope.subCategorias = result;
-                    }); -->
-
-                    <!-- <select ng-model="vm.itemConsumo.subCategoria" class="ui fluid dropdown"
-                          ng-options="sub._Id as sub.nome for sub in subCategorias">
+                    <select ng-model="vm.itemConsumo.subCategoria" class="ui fluid dropdown" ng-options="sub._id as sub.nome for sub in vm.subCategorias">
                         <option value="">Selecione a sub categoria</option>
-                    </select> -->
+                    </select>
   	              </div>
                 </div>
               </div>
@@ -171,6 +155,7 @@
                 <input type="button" class="positive ui button" ng-click="!vm.produto._id ? vm.insert() : vm.update()"  value="Salvar"/>
                 <input type="button" class="negative ui button" ng-if="vm.produto._id" ng-click="vm.delete()" id="btexcluir" value="Remover"/>
                 <input type="button" class="submit ui button" value="Novo" />
+                <a ui-sref="listaProduto" class="submit ui button">Ir para lista</a>
               </div>
             </div>
             <div class="one field">
@@ -190,39 +175,22 @@
     			      <div class="ui form">
     			        <div class="three fields">
     			          <div class="field">
-    			            <label>Item</label>
-                      <!-- código para colocar na controller 
-                          $http({
-                              method: 'GET',
-                              url: '/itemEstoque/'
-                          }).success(function (result) {
-                          $scope.itensEstoque = result;
-                      }); -->
-
-                      <!-- <select class="ui fluid dropdown" ng-model="vm.itemConsumo.itemEstoque" class="ui fluid dropdown"
-                            ng-options="item._Id as item.nome for item in itensEstoque">
-                          <option value="">Produto no estoque</option>
-                      </select> -->
-
+    			            <label>Item do estoque</label>
+                        <select ng-options="item._id as item.nome for item in vm.itensEstoque track by item.id" 
+                          ng-model="vm.itemConsumo.itemNovo">
+                          <option value="">Selecione a Unidade</option>
+                        </select>
     			          </div>
     			          <div class="field">
     			            <label>Quantidade</label>
-    			            <input type="text" name="itemEstoque[quantidadeCritica]" placeholder="#" type="text"/>
+    			            <input type="number" name="itemEstoque[quantidadeCritica]" placeholder="#" type="text"/>
     			          </div>
     			          <div class="field">
     			            <label>Un Medida</label>
-                      <!-- código para colocar na controller 
-                          $http({
-                              method: 'GET',
-                              url: '/unidadeDeMedida/'
-                          }).success(function (result) {
-                          $scope.unidadesDeMedida = result;
-                      }); -->
-                          <!-- <select class="ui fluid dropdown" ng-model="vm.itemConsumo.itemEstoque" class="ui fluid dropdown"
-                              ng-options="unidadeMedida._Id as unidadeMedida.unidade for unidadeMedida in unidadesDeMedida">
-                            <option value="" >Unidade de medida</option>
-                          </select> -->
-
+                        <select ng-options="unidade._id as unidade.unidade for unidade in vm.unidadeMedidas track by unidade.id" 
+                          ng-model="vm.itemEstoque.medida.unidadeMedida">
+                          <option value="">Selecione a Unidade</option>
+                        </select>
     			          </div>
     			        </div>
       			    	<div class="actions">

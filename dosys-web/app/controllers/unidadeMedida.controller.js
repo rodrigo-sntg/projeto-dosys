@@ -5,6 +5,11 @@ class UnidadeMedidaController{
 		this.getAll();
 		this.serverErrors = undefined;
 		this.$stateParams = $stateParams;
+
+		if(this.$stateParams.id){
+			this.getById(this.$stateParams.id);
+		}
+
 		this.data;
 
 	}
@@ -58,9 +63,9 @@ class UnidadeMedidaController{
 		});
 	};
 
-	getById (){
+	getById (id){
 		var that = this;
-		this.unidadeMedidaService.getByCpf(this.unidadeMedida).then(function (response){
+		this.unidadeMedidaService.getById(id).then(function (response){
 				that.unidadeMedida = response.data;
 			
 		}).catch(function(erro){

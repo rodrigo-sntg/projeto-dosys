@@ -19,15 +19,19 @@ class ItemConsumoService {
 
 	* delete(id){
 
+		// let item = yield ItemConsumo.findOne({'_id':id});
+		// console.log('passou aqui:' + cli._id);
+		// item.status = false;
+		// yield ItemConsumo.update({_id:cli._id}, item);
+		// return yield ItemConsumo.findOne({'_id':id}).populate('subCategoria');
+
+
 		let item = yield ItemConsumo.findOne({'_id':id});
-		console.log('passou aqui:' + cli._id);
-		item.status = false;
-		yield ItemConsumo.update({_id:cli._id}, item);
-		return yield ItemConsumo.findOne({'_id':id}).populate('subCategoria');
+		return yield ItemConsumo.remove({'_id':id});
 	}
 
 	* getById(id){
-		let ItemConsumo = yield ItemConsumo.findById(id, function(err, result){
+		let itemConsumo = yield ItemConsumo.findById(id, function(err, result){
 			if (err) { /* handle err */ }
 				console.log(err);
 				return err;
@@ -37,7 +41,7 @@ class ItemConsumoService {
 		        return null;
 		    }
 		}).populate('subCategoria');
-		return ItemConsumo;
+		return itemConsumo;
 	}
 
 	* getAll(){

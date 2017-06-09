@@ -17,7 +17,7 @@ RoutesConfig = function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state({
 		name:"cadastroCliente",
-		url:"/cadastroCliente/:cpf",
+		url:"/cadastroCliente/:id",
 		controller:"clienteCtrl as vm",
 		templateUrl:"app/views/cadastroCliente.html"
 	});
@@ -31,7 +31,7 @@ RoutesConfig = function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state({
 		name:"cadastroProduto",
-		url:"/cadastroProduto",
+		url:"/cadastroProduto/:id",
 		controller:"itemConsumoCtrl as vm",
 		templateUrl:"app/views/cadastroProduto.html"
 	});
@@ -45,7 +45,7 @@ RoutesConfig = function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state({
 		name:"cadastroEstoque",
-		url:"/cadastroEstoque",
+		url:"/cadastroEstoque/:id",
 		controller:"itemEstoqueCtrl as vm",
 		templateUrl:"app/views/cadastroEstoque.html"
 	});
@@ -59,7 +59,7 @@ RoutesConfig = function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state({
 		name:"cadastroUnidadeMedida",
-		url:"/cadastroUnidadeMedida",
+		url:"/cadastroUnidadeMedida/:id",
 		controller:"unidadeMedidaCtrl as vm",
 		templateUrl:"app/views/cadastroUnidadeMedida.html"
 	});
@@ -70,14 +70,6 @@ RoutesConfig = function($stateProvider, $urlRouterProvider){
 		controller:"unidadeMedidaCtrl as vm",
 		templateUrl:"app/views/listaUnidadeMedida.html"
 	});
-
-
-	// $stateProvider.state({
-	// 	name:"cadastroCategoria",
-	// 	url:"/cadastroCategoria",
-	// 	controller:"categoriaCtrl as vm",
-	// 	templateUrl:"app/views/cadastroCategoria.html"
-	// });
 
 	$stateProvider.state({
 		name:"cadastroCategoria",
@@ -93,6 +85,39 @@ RoutesConfig = function($stateProvider, $urlRouterProvider){
 		templateUrl:"app/views/listaCategoria.html"
 	});
 
+	$stateProvider.state({
+		name:"painelParametros",
+		url:"/painelParametros",
+		templateUrl:"app/views/painelParametros.html"
+	});
+
+	$stateProvider.state({
+		name:"painelParametrosUnidades",
+		url:"/painelParametrosUnidades",
+		controller:"unidadeMedidaCtrl as vm",
+		templateUrl:"app/views/painelParametrosUnidades.html"
+	});
+
+	$stateProvider.state({
+		name:"painelParametrosCategorias",
+		url:"/painelParametrosCategorias",
+		controller:"categoriaCtrl as vm",
+		templateUrl:"app/views/painelParametrosCategorias.html"
+	});
+
+	$stateProvider.state({
+		name:"cadastroPacote",
+		url:"/cadastroPacote/:id",
+		controller:"pacoteCtrl as vm",
+		templateUrl:"app/views/cadastroPacote.html"
+	});
+
+	$stateProvider.state({
+		name:"painelParametrosPacotes",
+		url:"/painelParametrosPacotes/:id",
+		controller:"pacoteCtrl as vm",
+		templateUrl:"app/views/painelParametrosPacotes.html"
+	});
 
 	
 

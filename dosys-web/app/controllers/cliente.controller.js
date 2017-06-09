@@ -5,12 +5,15 @@ class ClienteController{
 		this.getAll ();
 		this.serverErrors = undefined;
 		this.$stateParams = $stateParams;
-		console.log(this.$stateParams.cpf);
+		if(this.$stateParams.id){
+			this.getById(this.$stateParams.id);
+		}
+
 		this.data;
 	}
 
 	insert (){
-		limparMascaras;
+		this.limparMascaras;
 		var that = this;
 		this.clienteService.insert(this.cliente).then(function (response){
 			that.getAll();
@@ -21,7 +24,7 @@ class ClienteController{
 	};
 
 	update (){
-		limparMascaras();
+		this.limparMascaras();
 		var that = this;
 		this.clienteService.update(this.cliente).then(function (response){
 			that.getAll();
@@ -47,6 +50,17 @@ class ClienteController{
 				console.log(response.data);
 				that.clientes = response.data;	
 			});
+		});
+	};
+
+	getById (id){
+		var that = this;
+		this.clienteService.getById(id).then(function (response){
+				that.cliente = response.data;
+				that.cliente.dataNascimento = new Date(that.cliente.dataNascimento);
+			
+		}).catch(function(erro){
+			console.log(erro);
 		});
 	};
 

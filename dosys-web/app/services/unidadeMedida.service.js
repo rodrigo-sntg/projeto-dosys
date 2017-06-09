@@ -36,7 +36,7 @@ UnidadeMedidaService.prototype.getById = function(id){
 	return this.http({
 		method:'GET',
 		url:'http://localhost:9000/api/unidadeMedida/id/'+ id,
-		params:ItemConsumo
+		params:id
 	})
 }
 

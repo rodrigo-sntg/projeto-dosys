@@ -59,7 +59,7 @@ class CategoriaController{
 
 	getAll (){
 		var that = this;
-		this.categoriaService.getAll(this.categoria).then(function (response){
+		this.categoriaService.getAll().then(function (response){
 			that.categoriaService.getAll().then(function (response){
 				console.log(response.data);
 				that.categorias = response.data;	

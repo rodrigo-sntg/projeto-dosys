@@ -1,8 +1,9 @@
 
 class ItemEstoqueController{
-	constructor(itemEstoqueService, unidadeMedidaService, $stateParams){
+	constructor(itemEstoqueService, unidadeMedidaService, categoriaService, $stateParams){
 		this.itemEstoqueService = itemEstoqueService;
 		this.unidadeMedidaService = unidadeMedidaService;
+		this.categoriaService = categoriaService;
 		this.getAll ();
 		this.serverErrors = undefined;
 		let that = this;
@@ -11,9 +12,20 @@ class ItemEstoqueController{
 			that.unidadeMedidas = response.data;
 		});
 
+		this.categoriaService.getAll().then(function (response){
+			that.categorias = response.data;
+			console.log(that.categorias);
+		});
+
+
 		console.log(this.unidadeMedidas)
 
 		this.$stateParams = $stateParams;
+
+		if(this.$stateParams.id){
+			this.getById(this.$stateParams.id);
+		}
+
 		console.log(this.$stateParams.cpf);
 		this.data;
 
@@ -44,9 +56,9 @@ class ItemEstoqueController{
 		});
 	};
 
-	delete (){
+	delete (id){
 		var that = this;
-		this.itemEstoqueService.delete(this.itemEstoque._id).then(function (response){
+		this.itemEstoqueService.delete(id).then(function (response){
 			that.itemEstoque = response.data;
 			that.getAll();
 		}).catch(function(erro){
@@ -66,15 +78,19 @@ class ItemEstoqueController{
 
 
 
-	getById (){
+	getById (id){
 		var that = this;
-		this.itemEstoqueService.getById(this.itemEstoque).then(function (response){
+		this.itemEstoqueService.getById(id).then(function (response){
 				that.itemEstoque = response.data;
 			
 		}).catch(function(erro){
 			console.log(erro);
 		});
 	};
+
+	novo(){
+		this.itemEstoque = "";
+	}
 
 	// limparMascaras(){
 		// this.itemEstoque.cpf = this.itemEstoque.cpf.replace(/\D/g,"");

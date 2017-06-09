@@ -23,27 +23,49 @@
       </div>
 
       <form name="listaClienteForm">
-        <table class="ui selectable celled table">
+
+
+
+        <table class="ui compact celled definition table">
           <thead>
             <tr>
-              <th class="sort" data-sort="name">Nome</th>
-              <th>Status</th>
-              <th>Editar</th>
+              <th></th>
+              <th class="center aligned">Nome</th>
+              <th class="center aligned">Remover</th>
             </tr>
           </thead>
-          <tbody>              
-              <tr ng-repeat="item in vm.itensEstoque  | filter : filtro track by $index" class="positive">
-                    <td class="name">{{item.nome}}</td>
-                    <td class="ativo">{{item.status}}</td>
-                    <td class="center aligned">
-                      <a  ui-sref="cadastroEstoque({id:item._id})"><i class="edit icon "/></a>
-                    </td>
-              </tr>
+          <tbody>
+            <tr ng-repeat="item in vm.itensEstoque  | filter : filtro track by $index">
+              <td class="collapsing">
+                <div class="ui fitted slider checkbox">
+                  <input ng-disabled="true" type="checkbox" ng-checked="{{item.status}}"> <label></label>
+                </div>
+              </td>
+              <td ui-sref="cadastroEstoque({id:item._id})" class="center aligned">{{item.nome}}</td>
+              <td ui-sref="cadastroEstoque({id:item._id})" class="center aligned">
+                <button ng-click="vm.delete(item._id)" class="circular ui icon button">
+                  <i class="icon delete"></i>
+                </button>
+              </td>
+            </tr>
           </tbody>
+          <tfoot class="full-width">
+            <tr>
+              <th></th>
+              <th colspan="4">
+                <div ui-sref="cadastroEstoque" class="ui right floated small primary labeled icon button">
+                  <i class="add icon"></i> Adicionar
+                </div>
+                <div  class="ui">
+                  <div style="height: 33px;"   class="ui icon input">
+                    <input ng-model="filtro" class="prompt" type="text" placeholder="Filtro">
+                    <i class="search icon"></i>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </tfoot>
         </table>
-        <input type="button" class="ui circular add icon button right floated"  outcome="cadastroProduto">
-            <i class="add icon"></i>
-        </input>
       </form>
     </div>
 </div>

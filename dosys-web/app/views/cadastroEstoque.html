@@ -53,7 +53,7 @@
             <div class="one field">
               <div class="ui grid">
                 
-                <div class="ten wide column">
+                <div class="eight wide column">
                   <div class="field">
                     <label>Nome Item</label>
                     <input type="text" ng-model="vm.itemEstoque.nome" name="itemEstoque[nomeItem]"  class="inputNomeEstoque" id="nome" value="" placeholder="Nome Item"/>
@@ -66,9 +66,9 @@
                   	<div class="ui search">
           					  <div class="ui icon input">
           					  	<div>
-          						    <input type="text" ng-model="vm.itemEstoque._id" class="prompt" id="inputCodigo" value="" placeholder="# Código" />
+          						    <input ng-disabled="true" type="text" ng-model="vm.itemEstoque._id" class="prompt" id="inputCodigo" value="" placeholder="# Código" />
           					  	</div>					    
-          					    <i class="inverted circular search link icon" ng-click="vm.getById()"></i>
+          					    <i class="inverted circular search link icon" ng-click="vm.getById(vm.itemEstoque._id)"></i>
           					  </div>
           					</div>
                   </div>
@@ -86,31 +86,12 @@
             </div>
 
             <div class="two fields">
-                <div class="ui field toggle checkbox">
-                  <input type="checkbox" name="status" ng-model="vm.itemEstoque.status" ng-value="{{vm.itemEstoque.status}}">
-                  <label>Status</label>
-                </div>
+              <div class="ui field toggle checkbox">
+                <input type="checkbox" name="status" ng-model="vm.itemEstoque.status" ng-value="{{vm.itemEstoque.status}}">
+                <label>Status</label>
               </div>
+            </div>
 
-            <!-- <div class="two fields">
-              <div class="field">
-                <label>Categoria</label>
-	                <select ng-options="categoria._id as categoria.nome for categoria in vm.categorias track by categoria.id" 
-                    ng-model="vm.itemEstoque.categoria">
-                    <option value="">Selecione a Unidade</option>
-                  </select>
-              </div>
-              
-              <div class="field" id="subCategoria">
-	              <div class="field">
-	                <label>Sub Categoria</label>
-                  <select ng-options="subCategoria._id as subCategoria.nome for subCategoria in vm.subCategorias track by subCategoria.id" 
-                    ng-model="vm.itemEstoque.subCategoria">
-                    <option value="">Selecione a Unidade</option>
-                  </select>
-	              </div>
-              </div>
-            </div> -->
             <div class="three fields">
               <div class="field">
                 <label>Qtd Por Unidade</label>
@@ -118,10 +99,10 @@
               </div>
               <div class="field">
                 <label>Un Medida</label>
-                <select ng-options="unidade._id as unidade.unidade for unidade in vm.unidadeMedidas track by unidade.id" 
-                  ng-model="vm.itemEstoque.medida.unidadeMedida">
-                  <option value="">Selecione a Unidade</option>
-                </select>
+                    <select ng-model="vm.itemEstoque.medida.unidadeMedida" class="ui fluid dropdown" ng-options="unidade._id as unidade.unidade for unidade in vm.unidadeMedidas">
+                        <option value="">Selecione a categoria</option>
+                    </select>
+                
               </div>
               <div class="field">
                 <label>Qtd crítica</label>
@@ -136,7 +117,10 @@
 
 				        <input type="button" ng-if="vm.itemEstoque._id" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="btexcluir" />
 
-                <input type="button" class="submit ui button" outcome="cadastroEstoque" value="Novo" />
+                <input type="button" class="submit ui button" ng-if="itemForm.$dirty" ng-click="vm.novo()" value="Novo" />
+
+                <a ui-sref="listaEstoque" class="submit ui button">Ir para lista</a>
+
               </div>
             </div>
           </form>

@@ -25,7 +25,7 @@ CategoriaService.prototype.delete = function(id){
 	})
 }
 
-CategoriaService.prototype.getAll = function(categoria){
+CategoriaService.prototype.getAll = function(){
 	return this.http({
 		method:'GET',
 		url:'http://localhost:9000/api/categoria'

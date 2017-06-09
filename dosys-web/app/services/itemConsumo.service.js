@@ -2,19 +2,19 @@ function ItemConsumoService($http){
 	this.http = $http;
 }
 
-ItemConsumoService.prototype.insert = function(ItemConsumo){
+ItemConsumoService.prototype.insert = function(itemConsumo){
 	return this.http({
 		method:'POST',
 		url:'http://localhost:9000/api/itemConsumo',
-		params:ItemConsumo
+		params:itemConsumo
 	})
 }
 
-ItemConsumoService.prototype.update = function(ItemConsumo){
+ItemConsumoService.prototype.update = function(itemConsumo){
 	return this.http({
 		method:'PUT',
 		url:'http://localhost:9000/api/itemConsumo',
-		params:ItemConsumo
+		params:itemConsumo
 	})
 }
 
@@ -25,7 +25,7 @@ ItemConsumoService.prototype.delete = function(id){
 	})
 }
 
-ItemConsumoService.prototype.getAll = function(ItemConsumo){
+ItemConsumoService.prototype.getAll = function(){
 	return this.http({
 		method:'GET',
 		url:'http://localhost:9000/api/itemConsumo'
@@ -36,7 +36,7 @@ ItemConsumoService.prototype.getById = function(id){
 	return this.http({
 		method:'GET',
 		url:'http://localhost:9000/api/itemConsumo/id/'+ id,
-		params:ItemConsumo
+		params:id
 	})
 }
 

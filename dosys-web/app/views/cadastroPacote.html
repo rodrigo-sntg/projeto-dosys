@@ -1,0 +1,28 @@
+<script type="text/javascript">
+$('.test.checkbox').checkbox();
+</script>
+        
+        <form name="pacoteForm" class="ui form" prependId="false">
+        <h4 class="ui dividing header">Pacotes</h4>
+      
+        <div class="fields">
+            <div class="eight wide field">
+              <label>Nome</label>
+              <input type="text" ng-required="true" ng-model="vm.pacote.nome" name="nome" placeholder="Nome"/>
+            </div>
+            <div class="eight wide field">
+              <label>Quantidade</label>
+              <input type="number" min="1" max="60" ng-required="true" ng-model="vm.pacote.quantidade" name="nome" placeholder="Nome"/>
+            </div>
+        </div>
+
+  
+
+          <input type="button" ng-disabled="pacoteForm.$invalid" ng-click="!vm.pacote._id ? vm.insert() : vm.update()" 
+            class="positive ui button" id="btsalvar" value="Salvar" />
+          
+          <input type="button" ng-if="vm.pacote._id" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="  btexcluir" />
+
+          <a ui-sref="painelParametrosPacotes" class="submit ui button">Ir para lista</a>
+          
+      </form>

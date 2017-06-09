@@ -32,11 +32,11 @@ ItemEstoqueService.prototype.getAll = function(itemEstoque){
 	})
 }
 
-ItemEstoqueService.prototype.getById = function(itemEstoque){
+ItemEstoqueService.prototype.getById = function(id){
 	return this.http({
 		method:'GET',
-		url:'http://localhost:9000/api/itemEstoque/id/'+ itemEstoque._id,
-		params:itemEstoque
+		url:'http://localhost:9000/api/itemEstoque/id/'+ id,
+		params:id
 	})
 }
 

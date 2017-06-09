@@ -1,11 +1,35 @@
 
 class ItemConsumoController{
-	constructor(itemConsumoService, $stateParams){
+	constructor(itemConsumoService, unidadeMedidaService, itemEstoqueService, categoriaService, $stateParams){
 		this.itemConsumoService = itemConsumoService;
+		this.itemEstoqueService = itemEstoqueService;
 		this.getAll ();
+		this.unidadeMedidaService = unidadeMedidaService;
 		this.serverErrors = undefined;
 		this.$stateParams = $stateParams;
-		console.log(this.$stateParams.cpf);
+		let that = this;
+		this.categoria;
+		this.subCategoria;
+
+		this.itemEstoqueService.getAll().then(function (response){
+			that.itensEstoque = response.data;
+		});
+
+		this.unidadeMedidaService.getAll().then(function (response){
+			that.unidadeMedidas = response.data;
+		});
+
+		if(this.$stateParams.id){
+			this.getById(this.$stateParams.id);
+		}
+
+
+		this.categoriaService = categoriaService;
+
+		this.categoriaService.getAll().then(function (response){
+			that.categorias = response.data;
+		});
+
 		this.data;
 
 		// $http({
@@ -14,6 +38,18 @@ class ItemConsumoController{
   //           }).success(function (result) {
   //               $scope.categorias = result;
   //           });
+	}
+
+	atualizaSubCategorias(){
+		var that = this;
+		this.categoriaService.getById(this.categoria._id)
+
+		this.categoriaService.getById(this.categoria._id).then(function (response){
+			that.categoria = response.data;
+			that.subCategorias = response.data.subCategorias;
+		})
+
+		this.subCategorias = that.categoria.subCategorias;
 	}
 
 	insert (){
@@ -35,9 +71,9 @@ class ItemConsumoController{
 		});
 	};
 
-	delete (){
+	delete (id){
 		var that = this;
-		this.itemConsumoService.delete(this.itemConsumo._id).then(function (response){
+		this.itemConsumoService.delete(id).then(function (response){
 			that.itemConsumo = response.data;
 			that.getAll();
 		}).catch(function(erro){
@@ -47,7 +83,7 @@ class ItemConsumoController{
 
 	getAll (){
 		var that = this;
-		this.itemConsumoService.getAll(this.itemConsumo).then(function (response){
+		this.itemConsumoService.getAll().then(function (response){
 			that.itemConsumoService.getAll().then(function (response){
 				console.log(response.data);
 				that.itemConsumos = response.data;	
@@ -84,12 +120,9 @@ class ItemConsumoController{
 		});
 	};
 
-
-
-
-	getById (){
+	getById (id){
 		var that = this;
-		this.itemConsumoService.getByCpf(this.itemConsumo).then(function (response){
+		this.itemConsumoService.getById(id).then(function (response){
 				that.itemConsumo = response.data;
 			
 		}).catch(function(erro){

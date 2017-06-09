@@ -65,6 +65,37 @@ class ClienteService {
 		return cliente;
 	}
 
+	// * getById(id){
+	// 	let cliente = yield Cliente.findOne({'_id':id}, function(err, result){
+	// 		if (err) { /* handle err */ }
+	// 			console.log(err);
+	// 			return err;
+	// 	    if (result) {
+	// 			result.dataNascimento = new Date(result.dataNascimento);
+		    	
+	// 	        return result;
+	// 	    } else {
+	// 	        return null;
+	// 	    }
+	// 	}).populate('endereco');
+	// 	return cliente;
+	// }
+
+	* getById(id){
+		let cliente = yield Cliente.findById(id, function(err, result){
+			if (err) { /* handle err */ }
+				console.log(err);
+				return err;
+		    if (result) {
+		    	result.dataNascimento = new Date(result.dataNascimento);
+		        return result;
+		    } else {
+		        return null;
+		    }
+		}).populate('endereco');
+		return cliente;
+	}
+
 	* getAll(){
 		/*return yield Cliente.find({nome:new RegExp('teste')},{'nome':-1}).populate('endereco', 'rua complemento');*/
 		return yield Cliente.find().populate();

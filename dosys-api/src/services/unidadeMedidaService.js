@@ -23,7 +23,7 @@ class UnidadeMedidaService {
 	}
 
 	* getById(id){
-		let UnidadeMedida = yield UnidadeMedida.findById(id, function(err, result){
+		let unidadeMedida = yield UnidadeMedida.findById(id, function(err, result){
 			if (err) { /* handle err */ }
 				console.log(err);
 				return err;
@@ -33,7 +33,7 @@ class UnidadeMedidaService {
 		        return null;
 		    }
 		}).populate();
-		return UnidadeMedida;
+		return unidadeMedida;
 	}
 
 	* getAll(){

@@ -1,0 +1,74 @@
+	<script type="text/javascript">
+
+
+	$( document ).ready(function() {
+
+		$('.ui.dropdown').dropdown();
+		$('.ui.checkbox').checkbox();
+
+
+		$('.ui .item').on('click', function() {
+		   $('.ui .item').removeClass('active');
+		   $(this).addClass('active');
+		}); 
+	}
+
+	</script>
+
+	<div style="width: 100%;" class="ui raised very padded text container segment">
+	    <h3 class="ui dividing header">Parametrizações</h3>
+	    <div id="users">
+			<form name="listaClienteForm">
+				<div class="ui menu secondary pointing ">
+				  <a ui-sref="painelParametrosUnidades" class="item ">
+				    Unidades de medida
+				  </a>
+				  <a ui-sref="painelParametrosCategorias" class="item">
+				    Categorias
+				  </a>
+				  <a ui-sref="painelParametrosPacotes" class="item active">
+				    Pacotes
+				  </a>
+
+				</div>
+				<div class="">
+					<div id="users">
+				      <div class="one field">
+				        <div class="field full width">
+				          <input ng-model="filtro" class="search" style="width:100%;float:left;" placeholder="Filtro por Nome" />
+				        </div>
+				      </div>
+
+				      <form name="listaUnidadesForm">
+				        <table class="ui selectable celled table">
+				          <thead>
+				            <tr>
+				              <th class="center aligned sort">Pacote</th>
+				              <th class="center aligned">Quantidade Un</th>
+				              <th class="center aligned">Remover</th>
+				            </tr>
+				          </thead>
+				          <tbody>              
+				              <tr ng-repeat="pacote in vm.pacotes  | filter : filtro track by $index" class="positive">
+				                   
+				                    <td ui-sref="cadastroPacote({id:pacote._id})" class="name center aligned">{{pacote.nome}}</td>
+				                    <td ui-sref="cadastroPacote({id:pacote._id})" class="center aligned">{{pacote.quantidade}}</td>
+
+				                    <td ui-sref="cadastroPacote({id:pacote._id})" class="center aligned">
+							            <button ng-click="vm.delete(pacote._id)" class="circular ui icon button">
+						                  <i class="icon delete"></i>
+						                </button>
+				                    </td>
+				              </tr>
+				          </tbody>
+				        </table>
+				        <div class="ui circular green add icon button right floated">
+				            <i ui-sref="cadastroPacote" class="add icon"></i>
+				        </div>
+				      </form>
+				    </div>
+				</div>
+		        
+			</form>
+		</div>
+	</div>
