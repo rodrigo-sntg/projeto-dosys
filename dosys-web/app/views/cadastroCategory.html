@@ -1,0 +1,26 @@
+<script type="text/javascript">
+</script>
+<style type="text/css">
+
+</style>
+        
+  <form name="categoryForm" class="ui form" prependId="false">
+  <h4 class="ui dividing header">Category</h4>
+
+  <div class="fields">
+      <div class="eight wide field">
+        <input type="text" ng-required="true" ng-model="vm.category._id" name="nome" placeholder="Nome Category"/>
+      </div>
+
+      <select ng-model="vm.category.parent" class="ui fluid dropdown" ng-options="cat._id as cat._id for cat in vm.parents">
+        <option value="">Selecione a categoria pai</option>
+      </select>
+  </div>
+    <input type="button" ng-click="vm.insert()" 
+      class="positive ui button" id="btsalvar" value="Salvar" />
+    
+    <input type="button" ng-if="vm.category._id" ng-click="vm.delete()" class="negative  ui button" value="Inativar" id="  btexcluir" />
+
+    <a ui-sref="listaCategories" class="submit ui button">Ir para lista</a>
+    
+</form>

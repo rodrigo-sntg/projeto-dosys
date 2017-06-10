@@ -119,6 +119,19 @@ RoutesConfig = function($stateProvider, $urlRouterProvider){
 		templateUrl:"app/views/painelParametrosPacotes.html"
 	});
 
+	$stateProvider.state({
+		name:"cadastroCategory",
+		url:"/cadastroCategory/:id",
+		controller:"categoryCtrl as vm",
+		templateUrl:"app/views/cadastroCategory.html"
+	});
+
+	$stateProvider.state({
+		name:"listaCategories",
+		url:"/listaCategories",
+		controller:"categoryCtrl as vm",
+		templateUrl:"app/views/listaCategories.html"
+	});
 	
 
 }

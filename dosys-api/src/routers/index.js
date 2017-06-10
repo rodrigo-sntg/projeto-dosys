@@ -8,6 +8,7 @@ module.exports = function(server){
 	const unidadeMedidaRouter = require("./unidadeMedidaRouter");
 	const categoriaRouter = require("./categoriaRouter");
 	const pacoteRouter = require("./pacoteRouter");
+	const categoryRouter = require("./categoryRouter");
 	
 	server.use(mount('/api/users', userRouter.routes()));
 	server.use(mount('/api/clientes', clienteRouter.routes()));
@@ -16,4 +17,5 @@ module.exports = function(server){
 	server.use(mount('/api/unidadeMedida', unidadeMedidaRouter.routes()));
 	server.use(mount('/api/categoria', categoriaRouter.routes()));
 	server.use(mount('/api/pacote', pacoteRouter.routes()));
+	server.use(mount('/api/category', categoryRouter.routes()));
 };
